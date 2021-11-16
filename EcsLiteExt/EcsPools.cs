@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using EcsLite.Custom;
 using Leopotam.EcsLite;
 
 namespace EcsLiteExt

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 
-namespace EcsLite.Custom
+namespace EcsLiteExt
 {
 public sealed class EcsWorlds
 {
