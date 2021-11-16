@@ -10,9 +10,14 @@ WIP extension methods and other helpers for [LeoEcsLite](https://github.com/Leop
 
 ## Initialization
 
-At start of Init stage run:
+At start of Init stage:
 
 ```csharp
+// create all worlds beforehand
+var cmdWorld = new EcsWorld();
+var gameWorld = new EcsWorld();
+
+// then run InitComps
 EcsPools.I.InitComps(EcsWorlds.I);
 ```
 
@@ -67,7 +72,7 @@ if (entPacked.Unpack(out var world, out var entity))
 ## Tradeoffs and Limitations
   - To provide API current implementation stores an array of `worldInstanceCount * componentTypeCount` references to `EcsPool` instances. This may be not optimal for very big or dynamic amount of worlds.
 
-  - If only 1 world instance is expected per each world type API could be improved. Current implementation favours multiple worlds per 1 world type.
+  - If only 1 world instance is expected API could be improved. Current implementation favours multiple worlds.
 
 ## Known Issues
   - IL2CPP builds are expected to have runtime exception `EcsPools.I.InitComps(EcsWorlds.I);` due to code stripping, if any component isn't used in code. Should be fixed soon by catching exception and continue execution
