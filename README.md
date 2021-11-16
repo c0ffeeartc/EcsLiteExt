@@ -10,6 +10,9 @@ Helpers for LeoEcsLite
 
 ## Examples
 ```csharp
+// At start of init stage run:
+EcsPools.I.InitComps(EcsWorlds.I);
+
     // has extension methods for int, EcsPackedEntityWithWorld etc.
     {
         int entInt = cmdWorld.NewEntity();
