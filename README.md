@@ -51,14 +51,17 @@ bool isCompFlagA = entity.Is<CompFlagA>(cmdWorld.Id);
 ```csharp
 var entPacked = cmdWorld.PackEntityWithWorld(cmdWorld.NewEntity());
 
-ref CompA compA = ref entPacked.Add<CompA>();
-compA           = ref entPacked.Get<CompA>();
-compA           = ref entPacked.GetOrAdd<CompA>();
-bool hasCompA = entPacked.Has<CompA>();
-entPacked.Del<CompA>();
+if (entPacked.Unpack(out var world, out var entity))
+{
+    ref CompA compA = ref entPacked.Add<CompA>();
+    compA           = ref entPacked.Get<CompA>();
+    compA           = ref entPacked.GetOrAdd<CompA>();
+    bool hasCompA = entPacked.Has<CompA>();
+    entPacked.Del<CompA>();
 
-entPacked.Flag<CompFlagA>(true);
-bool isCompFlagA = entPacked.Is<CompFlagA>();
+    entPacked.Flag<CompFlagA>(true);
+    bool isCompFlagA = entPacked.Is<CompFlagA>();
+}
 ```
 
 ## Tradeoffs and Limitations
