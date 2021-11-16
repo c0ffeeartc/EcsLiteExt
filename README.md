@@ -4,7 +4,7 @@ Helpers for LeoEcsLite
 ## Installation
   - Copy `EcsLiteExt` sources folder to LeoEcsLite's folder with `asmdef` file
   - Modify LeoEcsLite
-    - Make `EcsPackedEntityWithWorld.Id`, ``EcsPackedEntityWithWorld.World` public
+    - Make `EcsPackedEntityWithWorld.Id`, `EcsPackedEntityWithWorld.World` public
     - Add `public int EcsWorld.Id;`
     - Add `EcsLiteExt.EcsWorlds.I.Add(this, out Id);` as first line to `public EcsWorld (in Config cfg = default) {`
 
