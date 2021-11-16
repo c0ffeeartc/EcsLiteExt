@@ -1,5 +1,5 @@
 # EcsLiteExt
-Helpers for LeoEcsLite
+WIP extension methods and other helpers for [LeoEcsLite](https://github.com/Leopotam/ecslite)
 
 ## Installation
   - Copy `EcsLiteExt` sources folder to LeoEcsLite's folder with `asmdef` file
@@ -8,31 +8,63 @@ Helpers for LeoEcsLite
     - Add `public int EcsWorld.Id;`
     - Add `EcsLiteExt.EcsWorlds.I.Add(this, out Id);` as first line to `public EcsWorld (in Config cfg = default) {`
 
-## Examples
+## Initialization
+
+At start of Init stage run:
+
 ```csharp
-// At start of init stage run:
 EcsPools.I.InitComps(EcsWorlds.I);
+```
 
-    // has extension methods for int, EcsPackedEntityWithWorld etc.
-    {
-        int entInt = cmdWorld.NewEntity();
+## Usage
+EcsLiteExt provides various extension methods to `int`, `EcsPackedEntityWithWorld`, etc.
 
-        ref CompA compA1 = ref entInt.Add<CompA>(cmdWorld.Id);
-        ref CompA compA2 = ref entInt.GetOrAdd<CompA>(cmdWorld.Id);
-        ref CompA compA3 = ref entInt.Get<CompA>(cmdWorld.Id);
-        bool hasCompA = entInt.Has<CompA>(cmdWorld.Id);
-        entInt.Del<CompA>(cmdWorld.Id);
-
-        entInt.Flag<CompFlagA>(cmdWorld.Id, true);
-        entInt.Is<CompFlagA>(cmdWorld.Id);
-    }
-
+### Components
+`IEcsCompData` provides `Get<T>`, `Add<T>`, `GetOrAdd<T>`, `Has<T>`, `Del<T>` entity methods
+```csharp
 public struct CompA : IEcsCompData
 {
     public int Value;
 }
-
-public struct CompFlagA : IEcsCompFlag
-{
-}
 ```
+
+`IEcsCompFlag` provides `Is<T>`, `Flag<T>` entity methods
+```csharp
+public struct CompFlagA : IEcsCompFlag { }
+```
+
+### int Entity
+```csharp
+int entity = cmdWorld.NewEntity();
+
+ref CompA compA = ref entity.Add<CompA>(cmdWorld.Id);
+compA           = ref entity.Get<CompA>(cmdWorld.Id);
+compA           = ref entity.GetOrAdd<CompA>(cmdWorld.Id);
+bool hasCompA = entity.Has<CompA>(cmdWorld.Id);
+entity.Del<CompA>(cmdWorld.Id);
+
+entity.Flag<CompFlagA>(cmdWorld.Id, true);
+bool isCompFlagA = entity.Is<CompFlagA>(cmdWorld.Id);
+```
+
+### EcsPackedEntityWithWorld
+```csharp
+var entPacked = cmdWorld.PackEntityWithWorld(cmdWorld.NewEntity());
+
+ref CompA compA = ref entPacked.Add<CompA>();
+compA           = ref entPacked.Get<CompA>();
+compA           = ref entPacked.GetOrAdd<CompA>();
+bool hasCompA = entPacked.Has<CompA>();
+entPacked.Del<CompA>();
+
+entPacked.Flag<CompFlagA>(true);
+bool isCompFlagA = entPacked.Is<CompFlagA>();
+```
+
+## Tradeoffs and Limitations
+  - To provide API current implementation stores an array of `worldInstanceCount * componentTypeCount` references to `EcsPool` instances. This may be not optimal for very big or dynamic amount of worlds.
+
+  - If only 1 world instance is expected per each world type API could be improved. Current implementation favours multiple worlds per 1 world type.
+
+## Known Issues
+  - IL2CPP builds are expected to have runtime exception `EcsPools.I.InitComps(EcsWorlds.I);` due to code stripping, if any component isn't used in code. Should be fixed soon by catching exception and continue execution
