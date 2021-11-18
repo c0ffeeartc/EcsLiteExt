@@ -2,6 +2,7 @@
 WIP extension methods and other helpers for [LeoEcsLite](https://github.com/Leopotam/ecslite)
 
 ## Installation
+> Warning: current installation doesn't work with Unity Package Manager, because it involves changing ecslite sources, and UPM will override these changes on each run. This will get fixed in next updates
   - Copy `EcsLiteExt` sources folder to LeoEcsLite's folder with `asmdef` file
   - Modify LeoEcsLite
     - Make `EcsPackedEntityWithWorld.Id`, `EcsPackedEntityWithWorld.World` public
