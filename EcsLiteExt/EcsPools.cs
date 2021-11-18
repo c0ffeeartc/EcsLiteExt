@@ -49,10 +49,10 @@ public class EcsPools
         _pools = new IEcsPool[CompCount*_ecsWorlds.Count];
     }
 
-    public EcsPool<TComp> Get<TComp>(int worldId) where TComp : struct
+    public EcsPool<TComp> Get<TComp>(int worldIndex) where TComp : struct, IEcsComp
     {
-        Int32 indexComp = Lookup<TComp>.Id;
-        Int32 index = indexComp + worldId * indexComp;
+        Int32 compIndex = Lookup<TComp>.Id;
+        Int32 index = compIndex + worldIndex * CompCount;
 
         IEcsPool pool = _pools[index];
         if ( pool != null )
@@ -60,7 +60,7 @@ public class EcsPools
             return Unsafe.As<EcsPool<TComp>>(pool);
         }
 
-        EcsWorld world = _ecsWorlds.Get(worldId);
+        EcsWorld world = _ecsWorlds.Get(worldIndex);
         EcsPool<TComp> newPool = world.GetPool<TComp>();
         _pools[index] = newPool;
         return newPool;
