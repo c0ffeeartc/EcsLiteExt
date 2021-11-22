@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcsLiteExt", "EcsLiteExt\EcsLiteExt.csproj", "{30003A39-005D-482F-8205-3405348FD9D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leopotam.EcsLite", "ecslite\Leopotam.EcsLite.csproj", "{CBE0576A-6A7D-4E6B-9166-00E1A68A7560}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30003A39-005D-482F-8205-3405348FD9D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30003A39-005D-482F-8205-3405348FD9D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30003A39-005D-482F-8205-3405348FD9D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30003A39-005D-482F-8205-3405348FD9D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE0576A-6A7D-4E6B-9166-00E1A68A7560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE0576A-6A7D-4E6B-9166-00E1A68A7560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE0576A-6A7D-4E6B-9166-00E1A68A7560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE0576A-6A7D-4E6B-9166-00E1A68A7560}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
